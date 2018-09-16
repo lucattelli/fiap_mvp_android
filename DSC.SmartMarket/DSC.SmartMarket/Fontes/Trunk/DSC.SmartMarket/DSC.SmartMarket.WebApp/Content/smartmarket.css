@@ -1,0 +1,195 @@
+body {
+    background-color: #2F2E2B;
+    color: white;
+}
+
+header h1 {
+    color: #DD6956;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.btn {
+    background-color: #696376;
+}
+
+.btn-primary {
+    background-color: #6AB6B5;
+}
+
+.container-fluid {
+    margin: 2em 5em 0 5em;
+}
+
+header.row {
+    margin-bottom: 2em;
+}
+
+section.row {
+    margin-top: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+footer.row {
+    text-align: center;
+    margin-top: 3em;
+    display: block;
+}
+
+section.borderbox,
+section.errorbox {
+    border: 1px solid white;
+    padding-left: 2em;
+    padding-bottom: 1em;
+    padding-right: 2em;
+}
+
+section.errorbox {
+    /*visibility: hidden;
+    height: 0;
+    width: 0;
+    float:left;
+    overflow:hidden;*/
+    border-color: orangered;
+}
+
+    section.errorbox h2 {
+        color: orangered;
+    }
+
+    section.errorbox ul {
+        color: orangered;
+    }
+
+    section.errorbox div.validation-summary-valid span {
+        color: orangered;
+    }
+
+    section.errorbox div.validation-summary-errors span {
+        color: orangered;
+    }
+
+section.borderbox + section.borderbox,
+section.borderbox + section.errorbox {
+    margin-top: 2em;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 16pt;
+    color: #DD6956;
+}
+
+/*table.listagem {
+            border: solid;
+        }*/
+
+table.listagem * th,
+table.listagem * td {
+    border: solid;
+    border-width: 1px;
+    padding: 4px 8px 4px 8px;
+}
+
+    table.listagem * th:last-child,
+    table.listagem * td:last-child {
+        text-align: center;
+        width: 12em;
+    }
+
+    table.listagem * td button {
+        padding: 0px 4px 0px 4px;
+        width: 70px;
+    }
+
+        table.listagem * td button + button {
+            margin-left: 8px;
+        }
+
+table.listagem * th {
+    background-color: #696376;
+    text-align: center;
+}
+
+table.listagem * tr.selected {
+	background-color: #7d7b73;
+}
+
+table.listagem tfoot tr td {
+    text-align: center;
+}
+
+    table.listagem tfoot tr td a {
+        cursor: pointer;
+        color: #DD6956;
+    }
+
+div.dbbox_big,
+div.dbbox_med {
+    width: 12em;
+    height: 12em;
+    border: solid 1px;
+    float: left;
+    text-align: center;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+	div.dbbox_big:HOVER,
+	div.dbbox_med:HOVER {
+		color: #2F2E2B;
+		background-color: white;
+	}
+
+    div.dbbox_big div:first-child {
+        height: 2em;
+        font-size: 2em;
+    }
+    
+    div.dbbox_big div.imc {
+        font-size: 4em;
+        padding-top: 0;
+        margin-top: -22px;
+    }
+
+    div.dbbox_big div:last-child {
+        font-size: 1em;
+    }
+
+    div.dbbox_med div:first-child {
+        height: 3.5em;
+    }
+
+    div.dbbox_med div:last-child {
+        font-size: 3em;
+        line-height: 1em;
+    }
+
+h1.navbar-brand {
+    font-size: 3em;
+}
+
+h1.navbar-brand:hover {
+	background-color: white;
+}
+
+h1.navbar-brand a:hover {
+	text-decoration: none;
+}
+
+header.nav * a {
+    color: #DD6956;
+}
+
+nav {
+	background-color: #464440;
+}
+
+footer {
+	padding-top: 0.5em;
+	background-color: #363430;
+}

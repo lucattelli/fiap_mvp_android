@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSC.SmartMarket.WebApp", "DSC.SmartMarket.WebApp\DSC.SmartMarket.WebApp.csproj", "{AE5EF64C-00A3-46CD-B31B-2ECD6637D0A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSC.SmartMarket.BusinessLogic", "DSC.SmartMarket.BusinessLogic\DSC.SmartMarket.BusinessLogic.csproj", "{D59A7B67-3DC0-4FA9-B509-A6E6684A1835}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSC.SmartMarket.Model", "DSC.SmartMarket.Model\DSC.SmartMarket.Model.csproj", "{33178A77-BD1E-4AD1-ADE5-C8670717CD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSC.SmartMarket.WebAPI", "DSC.SmartMarket.WebAPI\DSC.SmartMarket.WebAPI.csproj", "{6965C749-590C-4332-B9E3-DA3A84C9114A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DSC.SmartMarket.Database", "DSC.SmartMarket.Database\DSC.SmartMarket.Database.sqlproj", "{3345C9CD-BE4D-45CD-A32D-D084A252A516}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE5EF64C-00A3-46CD-B31B-2ECD6637D0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE5EF64C-00A3-46CD-B31B-2ECD6637D0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE5EF64C-00A3-46CD-B31B-2ECD6637D0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE5EF64C-00A3-46CD-B31B-2ECD6637D0A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59A7B67-3DC0-4FA9-B509-A6E6684A1835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59A7B67-3DC0-4FA9-B509-A6E6684A1835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59A7B67-3DC0-4FA9-B509-A6E6684A1835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59A7B67-3DC0-4FA9-B509-A6E6684A1835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33178A77-BD1E-4AD1-ADE5-C8670717CD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33178A77-BD1E-4AD1-ADE5-C8670717CD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33178A77-BD1E-4AD1-ADE5-C8670717CD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33178A77-BD1E-4AD1-ADE5-C8670717CD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6965C749-590C-4332-B9E3-DA3A84C9114A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6965C749-590C-4332-B9E3-DA3A84C9114A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6965C749-590C-4332-B9E3-DA3A84C9114A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6965C749-590C-4332-B9E3-DA3A84C9114A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3345C9CD-BE4D-45CD-A32D-D084A252A516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3345C9CD-BE4D-45CD-A32D-D084A252A516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3345C9CD-BE4D-45CD-A32D-D084A252A516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3345C9CD-BE4D-45CD-A32D-D084A252A516}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+		SolutionGuid = {BFDD7CA5-DB1E-495C-B0CF-739C4FBB0369}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://digitalsmartcrafters.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DSC.SmartMarket.WebApp\\DSC.SmartMarket.WebApp.csproj
+		SccProjectName1 = DSC.SmartMarket.WebApp
+		SccLocalPath1 = DSC.SmartMarket.WebApp
+		SccProjectUniqueName2 = DSC.SmartMarket.BusinessLogic\\DSC.SmartMarket.BusinessLogic.csproj
+		SccProjectName2 = DSC.SmartMarket.BusinessLogic
+		SccLocalPath2 = DSC.SmartMarket.BusinessLogic
+		SccProjectUniqueName3 = DSC.SmartMarket.Model\\DSC.SmartMarket.Model.csproj
+		SccProjectName3 = DSC.SmartMarket.Model
+		SccLocalPath3 = DSC.SmartMarket.Model
+		SccProjectUniqueName4 = DSC.SmartMarket.WebAPI\\DSC.SmartMarket.WebAPI.csproj
+		SccProjectName4 = DSC.SmartMarket.WebAPI
+		SccLocalPath4 = DSC.SmartMarket.WebAPI
+		SccProjectUniqueName5 = DSC.SmartMarket.Database\\DSC.SmartMarket.Database.sqlproj
+		SccProjectName5 = DSC.SmartMarket.Database
+		SccLocalPath5 = DSC.SmartMarket.Database
+	EndGlobalSection
+EndGlobal

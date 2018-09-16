@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Smart Market</string>
+    <string name="app_version">MVP v0.1a</string>
+    <string name="app_maker">By Digital Smart Crafters</string>
+    <string name="goto_login_action">Já tenho cadastro</string>
+    <string name="goto_signup_action">Novo Cadastro</string>
+
+    <!-- Strings related to login -->
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="action_login">Login</string>
+    <string name="error_invalid_email">O e-mail informado é inválido</string>
+    <string name="error_incorrect_password">E-mail e/ou senha incorretos</string>
+    <string name="error_field_required">Campo obrigatório</string>
+    <string name="error_login">Erro de comunicação. Tente novamente.</string>
+
+    <!-- Strings related to home -->
+    <string name="title_activity_home">Tela Principal</string>
+    <string name="nav_products">Produtos</string>
+    <string name="nav_products_title">Pesquisa de Produtos</string>
+    <string name="nav_nearme">Mercados</string>
+    <string name="nav_nearme_title">Mercados Próximos a Mim</string>
+    <string name="nav_cart">Carrinho</string>
+    <string name="nav_cart_title">Meu Carrinho de Compras</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="nav_settings_title">Configurações</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="products_no_products">Nenhum resultado. Para pesquisar, use o botão Pesquisar.</string>
+    <string name="product_name">Produto</string>
+    <string name="product_quantity">Quantidade</string>
+
+</resources>

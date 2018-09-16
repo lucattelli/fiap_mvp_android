@@ -1,0 +1,159 @@
+﻿@model DSC.SmartMarket.WebApp.Models.IndexClienteViewModel
+@using System.Linq;
+@using DSC.SmartMarket.WebApp.Models;
+
+@{
+    ViewBag.Title = "Listagem de Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var x = Model;
+}
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/cliente.js")"></script>
+}
+<section class="row borderbox">
+    <h2>Listagem de Clientes</h2>
+    <form class="form-horizontal">
+        <div class="form-group" />
+        @if ((Model != null) && Model.ListaCliente.Any())
+        {
+            <table class="listagem col-sm-12">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>RG</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cliente in Model.ListaCliente)
+                    {
+                        <tr @Html.Raw(Model.ClienteAlterar.Id == cliente.Id ? "class='selected'" : "")>
+                            <td>@cliente.Id</td>
+                            <td>@cliente.Nome</td>
+                            <td class="tdCPF">@cliente.CPF</td>
+                            <td class="tdRG">@cliente.RG</td>
+                            <td>@cliente.Email</td>
+                            <td class="tdTelefone">@cliente.Telefone</td>
+                            <td><button type="button" class="btn" onclick="javascript: window.document.location='@Url.Action("Alterar", new { ClienteId = cliente.Id, Pagina = Model.Pagina })'" @(Model.Operacao == IndexClienteViewModel.TipoOperacao.Listar ? "" : "disabled")>Alterar</button><button type="button" class="btn" onclick="javascript: confirmarExclusao('@Url.Action("Excluir", new { ClienteId = cliente.Id, Pagina = Model.Pagina })');" @(Model.Operacao == IndexClienteViewModel.TipoOperacao.Listar ? "" : "disabled")>Apagar</button></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            Página(s):&nbsp;&nbsp;&nbsp;
+                            @if (Model.Pagina > 1)
+                            {
+                                @Html.ActionLink("Anterior", "Index", "Cliente", new { Pagina = Model.Pagina - 1 }, new { onclick = Model.Operacao != IndexClienteViewModel.TipoOperacao.Listar ? "javascript: return false" : "" })
+                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                            }
+                            @for (int i = 1; i <= Model.TotalPagina; i++)
+                            {
+                                if (i == Model.Pagina)
+                                {
+                                    @Html.Raw(i.ToString());
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(i.ToString(), "Index", "Cliente", new { Pagina = i }, new { onclick = Model.Operacao != IndexClienteViewModel.TipoOperacao.Listar ? "javascript: return false" : "" });
+                                }
+                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                            }
+                            @if (Model.Pagina < Model.TotalPagina)
+                            {
+                                @Html.ActionLink("Mais", "Index", "Cliente", new { Pagina = Model.Pagina + 1 }, new { onclick = Model.Operacao != IndexClienteViewModel.TipoOperacao.Listar ? "javascript: return false" : "" })
+                            }
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            @RenderPage("~/Views/Shared/_DialogoExclusaoConfirmar.cshtml")
+        }
+        else
+        {
+            <div>Não existem registros de clientes a serem apresentados.</div>
+        }
+        </div>
+    </form>
+</section>
+@if (Model.Operacao == IndexClienteViewModel.TipoOperacao.Listar)
+{
+    <section class="row">
+        <button type="button" class="btn btn-default btn-primary" onclick="javascript: window.document.location='@Url.Action("Inserir", "Cliente", new { Pagina = Model.Pagina })'">Adicionar Cliente</button>
+        <button type="button" class="btn" onclick="javascript: window.document.location = '@Url.Action("Index","Dashboard")'">Voltar</button>
+    </section>
+}
+
+@if (Model.Operacao == IndexClienteViewModel.TipoOperacao.Incluir || Model.Operacao == IndexClienteViewModel.TipoOperacao.Alterar)
+{
+    <section class="row borderbox">
+        @if (Model.Operacao == IndexClienteViewModel.TipoOperacao.Incluir)
+        {
+            <h2>Incluir Novo Cliente</h2>
+        }
+        else
+        {
+            <h2>Alterar Cliente</h2>
+        }
+        @using (Html.BeginForm("Salvar", "Cliente", new { pagina = Model.Pagina }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(model => model.ClienteAlterar.Id)
+            @Html.HiddenFor(model => model.Operacao)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteAlterar.Nome, "Nome*:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(model => model.ClienteAlterar.Nome, new { @class = "form-control", placeholder = "Digite o Nome", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteAlterar.CPF, "CPF:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ClienteAlterar.CPF, new { @class = "form-control", placeholder = "Digite o CPF", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteAlterar.RG, "RG:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ClienteAlterar.RG, new { @class = "form-control", placeholder = "Digite o RG", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteAlterar.Email, "Email:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ClienteAlterar.Email, new { @class = "form-control", placeholder = "Digite o Email", required = "required" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteAlterar.Telefone, "Telefone:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ClienteAlterar.Telefone, new { @class = "form-control", placeholder = "Digite o Telefone", required = "required" })
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <span style="font-size: smaller;">* Campos de preenchimento obrigatório.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <button type="submit" class="btn btn-default btn-primary" id="btnenviar">Confirmar</button>
+                    <button type="button" class="btn" id="btncancelar" onclick="javascript: window.document.location='@Url.Action("Index", "Cliente", new { Pagina = Model.Pagina })'">Cancelar</button>
+                </div>
+            </div>
+        }
+    </section>
+    if (!Model.IsValid)
+    {
+        <section class="row errorbox">
+            @Html.ValidationSummary( "Por favor verifique os seguinte(s) erro(s) abaixo:")
+        </section>
+    }
+    @Scripts.Render("~/Scripts/cliente.js")
+}

@@ -1,0 +1,1332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SmartMarketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NM_CLIENTE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NR_CPF" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="NR_RG" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="DS_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="NR_TELEFONE" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_CONSULTA_LISTA_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_LISTA_COMPRA" />
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="DT_CRIACAO" />
+          </Key>
+          <Property Name="ID_LISTA_COMPRA" Type="int" Nullable="false" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="QT_ITEM" Type="int" Nullable="false" />
+          <Property Name="QT_ITEM_DISPONIVEL" Type="int" Nullable="false" />
+          <Property Name="VL_TOTAL" Type="float" Nullable="false" />
+          <Property Name="ID_GEOCODE_CONSULTA" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="VL_DISTANCIA_MAXIMA" Type="int" Nullable="false" />
+          <Property Name="IN_DENTRO_MUNICIPIO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_CONSULTA_LISTA_COMPRA_ITEM">
+          <Key>
+            <PropertyRef Name="ID_LISTA_COMPRA" />
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="DT_CRIACAO" />
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_LISTA_COMPRA" Type="int" Nullable="false" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="IN_DISPONIVEL" Type="bit" Nullable="false" />
+          <Property Name="QT_ITEM" Type="float" />
+          <Property Name="VL_PRODUTO" Type="float" />
+        </EntityType>
+        <EntityType Name="TB_ITEM_VENDA">
+          <Key>
+            <PropertyRef Name="ID_VENDA" />
+            <PropertyRef Name="NR_ITEM" />
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_VENDA" Type="int" Nullable="false" />
+          <Property Name="NR_ITEM" Type="int" Nullable="false" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="VL_PRODUTO" Type="float" Nullable="false" />
+          <Property Name="ID_SERIAL" Type="bigint" />
+        </EntityType>
+        <EntityType Name="TB_LISTA_COMPRA">
+          <Key>
+            <PropertyRef Name="ID_LISTA_COMPRA" />
+          </Key>
+          <Property Name="ID_LISTA_COMPRA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_LISTA_COMPRA" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="QT_ITEM" Type="int" Nullable="false" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_ALTERACAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_ULT_CONSULTA" Type="datetime" />
+          <Property Name="DT_EXCLUSAO" Type="datetime" />
+          <Property Name="IN_EXCLUIDO" Type="bit" Nullable="false" />
+          <Property Name="ID_GEOCODE_CONSULTA" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="VL_DISTANCIA_MAXIMA" Type="int" Nullable="false" />
+          <Property Name="IN_DENTRO_MUNICIPIO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_LISTA_COMPRA_ITEM">
+          <Key>
+            <PropertyRef Name="ID_LISTA_COMPRA" />
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_LISTA_COMPRA" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="QT_ITEM" Type="float" Nullable="false" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_ALTERACAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_DELECAO" Type="datetime" />
+          <Property Name="IN_DELETADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_PRODUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NM_PRODUTO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="VL_PESO_MEDIO" Type="float" />
+          <Property Name="VL_PESO_MAX" Type="float" />
+          <Property Name="VL_PESO_MIN" Type="float" />
+        </EntityType>
+        <EntityType Name="TB_RFID_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="ID_PRODUTO" />
+            <PropertyRef Name="ID_SERIAL" />
+          </Key>
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="ID_SERIAL" Type="bigint" Nullable="false" />
+          <Property Name="DT_EMISSAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_CONSUMO" Type="datetime" />
+          <Property Name="DT_ULT_LEITURA" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TB_SECAO">
+          <Key>
+            <PropertyRef Name="ID_SECAO" />
+            <PropertyRef Name="ID_MERCADO" />
+          </Key>
+          <Property Name="ID_SECAO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="NM_SECAO" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SECAO_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_SECAO" />
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_SECAO" Type="int" Nullable="false" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="IN_ATIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_SUPERMERCADO">
+          <Key>
+            <PropertyRef Name="ID_MERCADO" />
+          </Key>
+          <Property Name="ID_MERCADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NM_MERCADO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_GEOCODE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_SUPERMERCADO_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_MERCADO" />
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="int" Nullable="false" />
+          <Property Name="VL_PRODUTO" Type="float" Nullable="false" />
+          <Property Name="QT_ESTOQUE" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_USUARIO" />
+          </Key>
+          <Property Name="ID_TIPO_USUARIO" Type="int" Nullable="false" />
+          <Property Name="DS_TIPO_USUARIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NM_USUARIO" Type="nvarchar" MaxLength="100" />
+          <Property Name="DS_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="IN_ATIVO" Type="bit" />
+          <Property Name="DT_CADASTRO" Type="datetime" />
+          <Property Name="DT_ALTERACAO" Type="datetime" />
+          <Property Name="IN_DELETADO" Type="bit" />
+          <Property Name="DS_SENHA" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_TIPO_USUARIO" Type="int" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_VENDA">
+          <Key>
+            <PropertyRef Name="ID_VENDA" />
+          </Key>
+          <Property Name="ID_VENDA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="DT_VENDA" Type="datetime" />
+          <Property Name="ID_MERCADO" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA">
+          <End Role="TB_CONSULTA_LISTA_COMPRA" Type="Self.TB_CONSULTA_LISTA_COMPRA" Multiplicity="1" />
+          <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" Type="Self.TB_CONSULTA_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="DT_CRIACAO" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="DT_CRIACAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM">
+          <End Role="TB_LISTA_COMPRA_ITEM" Type="Self.TB_LISTA_COMPRA_ITEM" Multiplicity="1" />
+          <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" Type="Self.TB_CONSULTA_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA">
+          <End Role="TB_LISTA_COMPRA" Type="Self.TB_LISTA_COMPRA" Multiplicity="1" />
+          <End Role="TB_CONSULTA_LISTA_COMPRA" Type="Self.TB_CONSULTA_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO">
+          <End Role="TB_SUPERMERCADO" Type="Self.TB_SUPERMERCADO" Multiplicity="1" />
+          <End Role="TB_CONSULTA_LISTA_COMPRA" Type="Self.TB_CONSULTA_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="ID_MERCADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_RFID_PRODUTO">
+          <End Role="TB_RFID_PRODUTO" Type="Self.TB_RFID_PRODUTO" Multiplicity="0..1" />
+          <End Role="TB_ITEM_VENDA" Type="Self.TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_RFID_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+              <PropertyRef Name="ID_SERIAL" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+              <PropertyRef Name="ID_SERIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_SUPERMERC_PROD">
+          <End Role="TB_SUPERMERCADO_PRODUTO" Type="Self.TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Role="TB_ITEM_VENDA" Type="Self.TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_VENDA">
+          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="1" />
+          <End Role="TB_ITEM_VENDA" Type="Self.TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_VENDA">
+              <PropertyRef Name="ID_VENDA" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="ID_VENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_COMPRA_CLIENTE">
+          <End Role="TB_CLIENTE" Type="Self.TB_CLIENTE" Multiplicity="1" />
+          <End Role="TB_LISTA_COMPRA" Type="Self.TB_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_COMPRA_ITEM_LISTA_COMPRA">
+          <End Role="TB_LISTA_COMPRA" Type="Self.TB_LISTA_COMPRA" Multiplicity="1" />
+          <End Role="TB_LISTA_COMPRA_ITEM" Type="Self.TB_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="ID_LISTA_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_COMPRA_ITEM_PRODUTO">
+          <End Role="TB_PRODUTO" Type="Self.TB_PRODUTO" Multiplicity="1" />
+          <End Role="TB_LISTA_COMPRA_ITEM" Type="Self.TB_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFID_PROD_SUPERMERC_PROD">
+          <End Role="TB_SUPERMERCADO_PRODUTO" Type="Self.TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Role="TB_RFID_PRODUTO" Type="Self.TB_RFID_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_RFID_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_PROD_SUPERMERC_PROD">
+          <End Role="TB_SUPERMERCADO_PRODUTO" Type="Self.TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Role="TB_SECAO_PRODUTO" Type="Self.TB_SECAO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_SECAO_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_PROUTO_SECAO">
+          <End Role="TB_SECAO" Type="Self.TB_SECAO" Multiplicity="1" />
+          <End Role="TB_SECAO_PRODUTO" Type="Self.TB_SECAO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SECAO">
+              <PropertyRef Name="ID_SECAO" />
+              <PropertyRef Name="ID_MERCADO" />
+            </Principal>
+            <Dependent Role="TB_SECAO_PRODUTO">
+              <PropertyRef Name="ID_SECAO" />
+              <PropertyRef Name="ID_MERCADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_SUPERMERCADO">
+          <End Role="TB_SUPERMERCADO" Type="Self.TB_SUPERMERCADO" Multiplicity="1" />
+          <End Role="TB_SECAO" Type="Self.TB_SECAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Principal>
+            <Dependent Role="TB_SECAO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUPERMERC_PROD_SUPERMERC">
+          <End Role="TB_SUPERMERCADO" Type="Self.TB_SUPERMERCADO" Multiplicity="1" />
+          <End Role="TB_SUPERMERCADO_PRODUTO" Type="Self.TB_SUPERMERCADO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Principal>
+            <Dependent Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUPERMERCADO_PRODUTO_PROD">
+          <End Role="TB_PRODUTO" Type="Self.TB_PRODUTO" Multiplicity="1" />
+          <End Role="TB_SUPERMERCADO_PRODUTO" Type="Self.TB_SUPERMERCADO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_USUARIO">
+          <End Role="TB_TIPO_USUARIO" Type="Self.TB_TIPO_USUARIO" Multiplicity="1" />
+          <End Role="TB_USUARIO" Type="Self.TB_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TIPO_USUARIO">
+              <PropertyRef Name="ID_TIPO_USUARIO" />
+            </Principal>
+            <Dependent Role="TB_USUARIO">
+              <PropertyRef Name="ID_TIPO_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_CLIENTE">
+          <End Role="TB_CLIENTE" Type="Self.TB_CLIENTE" Multiplicity="0..1" />
+          <End Role="TB_USUARIO" Type="Self.TB_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="TB_USUARIO">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDA_CLIENTE">
+          <End Role="TB_CLIENTE" Type="Self.TB_CLIENTE" Multiplicity="1" />
+          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="TB_VENDA">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDA_SUPERMERCADO">
+          <End Role="TB_SUPERMERCADO" Type="Self.TB_SUPERMERCADO" Multiplicity="1" />
+          <End Role="TB_VENDA" Type="Self.TB_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="ID_MERCADO" />
+            </Principal>
+            <Dependent Role="TB_VENDA">
+              <PropertyRef Name="ID_MERCADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartMarketModelStoreContainer">
+          <EntitySet Name="TB_CLIENTE" EntityType="Self.TB_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CONSULTA_LISTA_COMPRA" EntityType="Self.TB_CONSULTA_LISTA_COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CONSULTA_LISTA_COMPRA_ITEM" EntityType="Self.TB_CONSULTA_LISTA_COMPRA_ITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_ITEM_VENDA" EntityType="Self.TB_ITEM_VENDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LISTA_COMPRA" EntityType="Self.TB_LISTA_COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LISTA_COMPRA_ITEM" EntityType="Self.TB_LISTA_COMPRA_ITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PRODUTO" EntityType="Self.TB_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_RFID_PRODUTO" EntityType="Self.TB_RFID_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SECAO" EntityType="Self.TB_SECAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SECAO_PRODUTO" EntityType="Self.TB_SECAO_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SUPERMERCADO" EntityType="Self.TB_SUPERMERCADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SUPERMERCADO_PRODUTO" EntityType="Self.TB_SUPERMERCADO_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_TIPO_USUARIO" EntityType="Self.TB_TIPO_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_USUARIO" EntityType="Self.TB_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_VENDA" EntityType="Self.TB_VENDA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA" Association="Self.FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA">
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" EntitySet="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM" Association="Self.FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM">
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" EntitySet="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA" Association="Self.FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA">
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO" Association="Self.FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO">
+            <End Role="TB_SUPERMERCADO" EntitySet="TB_SUPERMERCADO" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ITEM_VENDA_RFID_PRODUTO" Association="Self.FK_ITEM_VENDA_RFID_PRODUTO">
+            <End Role="TB_RFID_PRODUTO" EntitySet="TB_RFID_PRODUTO" />
+            <End Role="TB_ITEM_VENDA" EntitySet="TB_ITEM_VENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ITEM_VENDA_SUPERMERC_PROD" Association="Self.FK_ITEM_VENDA_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="TB_SUPERMERCADO_PRODUTO" />
+            <End Role="TB_ITEM_VENDA" EntitySet="TB_ITEM_VENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ITEM_VENDA_VENDA" Association="Self.FK_ITEM_VENDA_VENDA">
+            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+            <End Role="TB_ITEM_VENDA" EntitySet="TB_ITEM_VENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_COMPRA_CLIENTE" Association="Self.FK_LISTA_COMPRA_CLIENTE">
+            <End Role="TB_CLIENTE" EntitySet="TB_CLIENTE" />
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_COMPRA_ITEM_LISTA_COMPRA" Association="Self.FK_LISTA_COMPRA_ITEM_LISTA_COMPRA">
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_COMPRA_ITEM_PRODUTO" Association="Self.FK_LISTA_COMPRA_ITEM_PRODUTO">
+            <End Role="TB_PRODUTO" EntitySet="TB_PRODUTO" />
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RFID_PROD_SUPERMERC_PROD" Association="Self.FK_RFID_PROD_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="TB_SUPERMERCADO_PRODUTO" />
+            <End Role="TB_RFID_PRODUTO" EntitySet="TB_RFID_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECAO_PROD_SUPERMERC_PROD" Association="Self.FK_SECAO_PROD_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="TB_SUPERMERCADO_PRODUTO" />
+            <End Role="TB_SECAO_PRODUTO" EntitySet="TB_SECAO_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECAO_PROUTO_SECAO" Association="Self.FK_SECAO_PROUTO_SECAO">
+            <End Role="TB_SECAO" EntitySet="TB_SECAO" />
+            <End Role="TB_SECAO_PRODUTO" EntitySet="TB_SECAO_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECAO_SUPERMERCADO" Association="Self.FK_SECAO_SUPERMERCADO">
+            <End Role="TB_SUPERMERCADO" EntitySet="TB_SUPERMERCADO" />
+            <End Role="TB_SECAO" EntitySet="TB_SECAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUPERMERC_PROD_SUPERMERC" Association="Self.FK_SUPERMERC_PROD_SUPERMERC">
+            <End Role="TB_SUPERMERCADO" EntitySet="TB_SUPERMERCADO" />
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="TB_SUPERMERCADO_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUPERMERCADO_PRODUTO_PROD" Association="Self.FK_SUPERMERCADO_PRODUTO_PROD">
+            <End Role="TB_PRODUTO" EntitySet="TB_PRODUTO" />
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="TB_SUPERMERCADO_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_USUARIO" Association="Self.FK_TIPO_USUARIO">
+            <End Role="TB_TIPO_USUARIO" EntitySet="TB_TIPO_USUARIO" />
+            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_CLIENTE" Association="Self.FK_USUARIO_CLIENTE">
+            <End Role="TB_CLIENTE" EntitySet="TB_CLIENTE" />
+            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDA_CLIENTE" Association="Self.FK_VENDA_CLIENTE">
+            <End Role="TB_CLIENTE" EntitySet="TB_CLIENTE" />
+            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDA_SUPERMERCADO" Association="Self.FK_VENDA_SUPERMERCADO">
+            <End Role="TB_SUPERMERCADO" EntitySet="TB_SUPERMERCADO" />
+            <End Role="TB_VENDA" EntitySet="TB_VENDA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SmartMarketModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SmartMarketModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClienteSet" EntityType="SmartMarketModel.Cliente" />
+          <EntitySet Name="ItemVendaSet" EntityType="SmartMarketModel.ItemVenda" />
+          <EntitySet Name="ProdutoSet" EntityType="SmartMarketModel.Produto" />
+          <EntitySet Name="RFIDProdutoSet" EntityType="SmartMarketModel.RFIDProduto" />
+          <EntitySet Name="SecaoSet" EntityType="SmartMarketModel.Secao" />
+          <EntitySet Name="SecaoProdutoSet" EntityType="SmartMarketModel.SecaoProduto" />
+          <EntitySet Name="SupermercadoSet" EntityType="SmartMarketModel.Supermercado" />
+          <EntitySet Name="SupermercadoProdutoSet" EntityType="SmartMarketModel.SupermercadoProduto" />
+          <EntitySet Name="VendaSet" EntityType="SmartMarketModel.Venda" />
+          <AssociationSet Name="VendaClienteAssocSet" Association="SmartMarketModel.FK_VENDA_CLIENTE">
+            <End Role="TB_CLIENTE" EntitySet="ClienteSet" />
+            <End Role="TB_VENDA" EntitySet="VendaSet" />
+          </AssociationSet>
+          <AssociationSet Name="ItemVendaSupermercadoRFIDProdutoAssocSet" Association="SmartMarketModel.FK_ITEM_VENDA_RFID_PRODUTO">
+            <End Role="TB_RFID_PRODUTO" EntitySet="RFIDProdutoSet" />
+            <End Role="TB_ITEM_VENDA" EntitySet="ItemVendaSet" />
+          </AssociationSet>
+          <AssociationSet Name="ItemVendaSupermercadoProdutoAssocSet" Association="SmartMarketModel.FK_ITEM_VENDA_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="SupermercadoProdutoSet" />
+            <End Role="TB_ITEM_VENDA" EntitySet="ItemVendaSet" />
+          </AssociationSet>
+          <AssociationSet Name="ItemVendaVendaAssocSet" Association="SmartMarketModel.FK_ITEM_VENDA_VENDA">
+            <End Role="TB_VENDA" EntitySet="VendaSet" />
+            <End Role="TB_ITEM_VENDA" EntitySet="ItemVendaSet" />
+          </AssociationSet>
+          <AssociationSet Name="SupermercadoProdutoProdutoAssocSet" Association="SmartMarketModel.FK_SUPERMERCADO_PRODUTO_PROD">
+            <End Role="TB_PRODUTO" EntitySet="ProdutoSet" />
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="SupermercadoProdutoSet" />
+          </AssociationSet>
+          <AssociationSet Name="RFIDProdutoSupermercadoProdutoAssocSet" Association="SmartMarketModel.FK_RFID_PROD_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="SupermercadoProdutoSet" />
+            <End Role="TB_RFID_PRODUTO" EntitySet="RFIDProdutoSet" />
+          </AssociationSet>
+          <AssociationSet Name="SecaoProdutoSecaoAssocSet" Association="SmartMarketModel.FK_SECAO_PROUTO_SECAO">
+            <End Role="TB_SECAO" EntitySet="SecaoSet" />
+            <End Role="TB_SECAO_PRODUTO" EntitySet="SecaoProdutoSet" />
+          </AssociationSet>
+          <AssociationSet Name="SecaoSupermercadoAssocSet" Association="SmartMarketModel.FK_SECAO_SUPERMERCADO">
+            <End Role="TB_SUPERMERCADO" EntitySet="SupermercadoSet" />
+            <End Role="TB_SECAO" EntitySet="SecaoSet" />
+          </AssociationSet>
+          <AssociationSet Name="SecaoProdutoSupermercadoProdutoAssocSet" Association="SmartMarketModel.FK_SECAO_PROD_SUPERMERC_PROD">
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="SupermercadoProdutoSet" />
+            <End Role="TB_SECAO_PRODUTO" EntitySet="SecaoProdutoSet" />
+          </AssociationSet>
+          <AssociationSet Name="SupermercadoProdutoSupermercadoAssocSet" Association="SmartMarketModel.FK_SUPERMERC_PROD_SUPERMERC">
+            <End Role="TB_SUPERMERCADO" EntitySet="SupermercadoSet" />
+            <End Role="TB_SUPERMERCADO_PRODUTO" EntitySet="SupermercadoProdutoSet" />
+          </AssociationSet>
+          <AssociationSet Name="VendaSupermercadoAssocSet" Association="SmartMarketModel.FK_VENDA_SUPERMERCADO">
+            <End Role="TB_SUPERMERCADO" EntitySet="SupermercadoSet" />
+            <End Role="TB_VENDA" EntitySet="VendaSet" />
+          </AssociationSet>
+          <EntitySet Name="UsuarioSet" EntityType="SmartMarketModel.Usuario" />
+          <EntitySet Name="TB_CONSULTA_LISTA_COMPRA" EntityType="SmartMarketModel.ConsultaListaCompra" />
+          <EntitySet Name="TB_CONSULTA_LISTA_COMPRA_ITEM" EntityType="SmartMarketModel.ConsultaListaCompraItem" />
+          <EntitySet Name="TB_LISTA_COMPRA" EntityType="SmartMarketModel.ListaCompra" />
+          <EntitySet Name="TB_LISTA_COMPRA_ITEM" EntityType="SmartMarketModel.ListaCompraItem" />
+          <AssociationSet Name="FK_LISTA_COMPRA_CLIENTE" Association="SmartMarketModel.FK_LISTA_COMPRA_CLIENTE">
+            <End Role="Cliente" EntitySet="ClienteSet" />
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA" Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA">
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" EntitySet="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA" Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA">
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO" Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO">
+            <End Role="Supermercado" EntitySet="SupermercadoSet" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA" EntitySet="TB_CONSULTA_LISTA_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM" Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM">
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+            <End Role="TB_CONSULTA_LISTA_COMPRA_ITEM" EntitySet="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_COMPRA_ITEM_LISTA_COMPRA" Association="SmartMarketModel.FK_LISTA_COMPRA_ITEM_LISTA_COMPRA">
+            <End Role="TB_LISTA_COMPRA" EntitySet="TB_LISTA_COMPRA" />
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_COMPRA_ITEM_PRODUTO" Association="SmartMarketModel.FK_LISTA_COMPRA_ITEM_PRODUTO">
+            <End Role="Produto" EntitySet="ProdutoSet" />
+            <End Role="TB_LISTA_COMPRA_ITEM" EntitySet="TB_LISTA_COMPRA_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_CLIENTE" Association="SmartMarketModel.FK_USUARIO_CLIENTE">
+            <End Role="Cliente" EntitySet="ClienteSet" />
+            <End Role="Usuario" EntitySet="UsuarioSet" />
+          </AssociationSet>
+          <EntitySet Name="TB_TIPO_USUARIO" EntityType="SmartMarketModel.TipoUsuario" />
+          <AssociationSet Name="FK_TIPO_USUARIO" Association="SmartMarketModel.FK_TIPO_USUARIO">
+            <End Role="TB_TIPO_USUARIO" EntitySet="TB_TIPO_USUARIO" />
+            <End Role="Usuario" EntitySet="UsuarioSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="RG" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Telefone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ListaVenda" Relationship="SmartMarketModel.FK_VENDA_CLIENTE" FromRole="TB_CLIENTE" ToRole="TB_VENDA" />
+          <NavigationProperty Name="ListaCompra" Relationship="SmartMarketModel.FK_LISTA_COMPRA_CLIENTE" FromRole="Cliente" ToRole="TB_LISTA_COMPRA" />
+          <NavigationProperty Name="Usuario" Relationship="SmartMarketModel.FK_USUARIO_CLIENTE" FromRole="Cliente" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="ItemVenda">
+          <Key>
+            <PropertyRef Name="IdVenda" />
+            <PropertyRef Name="NumeroItem" />
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdVenda" Type="Int32" Nullable="false" />
+          <Property Name="NumeroItem" Type="Int32" Nullable="false" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="ValorProduto" Type="Double" Nullable="false" />
+          <Property Name="RFIDSerial" Type="Int64" />
+          <NavigationProperty Name="RFIDProduto" Relationship="SmartMarketModel.FK_ITEM_VENDA_RFID_PRODUTO" FromRole="TB_ITEM_VENDA" ToRole="TB_RFID_PRODUTO" />
+          <NavigationProperty Name="SupermercadoProduto" Relationship="SmartMarketModel.FK_ITEM_VENDA_SUPERMERC_PROD" FromRole="TB_ITEM_VENDA" ToRole="TB_SUPERMERCADO_PRODUTO" />
+          <NavigationProperty Name="Venda" Relationship="SmartMarketModel.FK_ITEM_VENDA_VENDA" FromRole="TB_ITEM_VENDA" ToRole="TB_VENDA" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" annotation:StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PesoMedio" Type="Double" />
+          <Property Name="PesoMaximo" Type="Double" />
+          <Property Name="PesoMinimo" Type="Double" />
+          <NavigationProperty Name="ListaSupermercadoProduto" Relationship="SmartMarketModel.FK_SUPERMERCADO_PRODUTO_PROD" FromRole="TB_PRODUTO" ToRole="TB_SUPERMERCADO_PRODUTO" />
+          <NavigationProperty Name="ListaCompraItem" Relationship="SmartMarketModel.FK_LISTA_COMPRA_ITEM_PRODUTO" FromRole="Produto" ToRole="TB_LISTA_COMPRA_ITEM" />
+        </EntityType>
+        <EntityType Name="RFIDProduto">
+          <Key>
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="IdProduto" />
+            <PropertyRef Name="RFIDSerial" />
+          </Key>
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="RFIDSerial" Type="Int64" Nullable="false" />
+          <Property Name="DataEmisao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataConsumo" Type="DateTime" Precision="3" />
+          <Property Name="DataUltimaLeitura" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ItemVenda" Relationship="SmartMarketModel.FK_ITEM_VENDA_RFID_PRODUTO" FromRole="TB_RFID_PRODUTO" ToRole="TB_ITEM_VENDA" />
+          <NavigationProperty Name="SupermercadoProduto" Relationship="SmartMarketModel.FK_RFID_PROD_SUPERMERC_PROD" FromRole="TB_RFID_PRODUTO" ToRole="TB_SUPERMERCADO_PRODUTO" />
+        </EntityType>
+        <EntityType Name="Secao">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdMercado" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ListaSecaoProduto" Relationship="SmartMarketModel.FK_SECAO_PROUTO_SECAO" FromRole="TB_SECAO" ToRole="TB_SECAO_PRODUTO" />
+          <NavigationProperty Name="Supermercado" Relationship="SmartMarketModel.FK_SECAO_SUPERMERCADO" FromRole="TB_SECAO" ToRole="TB_SUPERMERCADO" />
+        </EntityType>
+        <EntityType Name="SecaoProduto">
+          <Key>
+            <PropertyRef Name="IdSecao" />
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdSecao" Type="Int32" Nullable="false" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Secao" Relationship="SmartMarketModel.FK_SECAO_PROUTO_SECAO" FromRole="TB_SECAO_PRODUTO" ToRole="TB_SECAO" />
+          <NavigationProperty Name="ListaSupermercadoProduto" Relationship="SmartMarketModel.FK_SECAO_PROD_SUPERMERC_PROD" FromRole="TB_SECAO_PRODUTO" ToRole="TB_SUPERMERCADO_PRODUTO" />
+        </EntityType>
+        <EntityType Name="Supermercado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ListaSecao" Relationship="SmartMarketModel.FK_SECAO_SUPERMERCADO" FromRole="TB_SUPERMERCADO" ToRole="TB_SECAO" />
+          <NavigationProperty Name="ListaSupermercadoProduto" Relationship="SmartMarketModel.FK_SUPERMERC_PROD_SUPERMERC" FromRole="TB_SUPERMERCADO" ToRole="TB_SUPERMERCADO_PRODUTO" />
+          <NavigationProperty Name="ListaVenda" Relationship="SmartMarketModel.FK_VENDA_SUPERMERCADO" FromRole="TB_SUPERMERCADO" ToRole="TB_VENDA" />
+          <NavigationProperty Name="ListaConsulta" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO" FromRole="Supermercado" ToRole="TB_CONSULTA_LISTA_COMPRA" />
+          <Property Name="IdGeocode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupermercadoProduto">
+          <Key>
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="ValorProduto" Type="Double" Nullable="false" />
+          <Property Name="QuantidadeEstoque" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ListaItemVenda" Relationship="SmartMarketModel.FK_ITEM_VENDA_SUPERMERC_PROD" FromRole="TB_SUPERMERCADO_PRODUTO" ToRole="TB_ITEM_VENDA" />
+          <NavigationProperty Name="Produto" Relationship="SmartMarketModel.FK_SUPERMERCADO_PRODUTO_PROD" FromRole="TB_SUPERMERCADO_PRODUTO" ToRole="TB_PRODUTO" />
+          <NavigationProperty Name="ListaRFIDProduto" Relationship="SmartMarketModel.FK_RFID_PROD_SUPERMERC_PROD" FromRole="TB_SUPERMERCADO_PRODUTO" ToRole="TB_RFID_PRODUTO" />
+          <NavigationProperty Name="ListaSecaoProduto" Relationship="SmartMarketModel.FK_SECAO_PROD_SUPERMERC_PROD" FromRole="TB_SUPERMERCADO_PRODUTO" ToRole="TB_SECAO_PRODUTO" />
+          <NavigationProperty Name="Supermercado" Relationship="SmartMarketModel.FK_SUPERMERC_PROD_SUPERMERC" FromRole="TB_SUPERMERCADO_PRODUTO" ToRole="TB_SUPERMERCADO" />
+        </EntityType>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="DataVenda" Type="DateTime" Precision="3" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="SmartMarketModel.FK_VENDA_CLIENTE" FromRole="TB_VENDA" ToRole="TB_CLIENTE" />
+          <NavigationProperty Name="ListaItemVenda" Relationship="SmartMarketModel.FK_ITEM_VENDA_VENDA" FromRole="TB_VENDA" ToRole="TB_ITEM_VENDA" />
+          <NavigationProperty Name="Supermercado" Relationship="SmartMarketModel.FK_VENDA_SUPERMERCADO" FromRole="TB_VENDA" ToRole="TB_SUPERMERCADO" />
+        </EntityType>
+        <Association Name="FK_VENDA_CLIENTE">
+          <End Type="SmartMarketModel.Cliente" Role="TB_CLIENTE" Multiplicity="1" />
+          <End Type="SmartMarketModel.Venda" Role="TB_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CLIENTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_VENDA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_RFID_PRODUTO">
+          <End Type="SmartMarketModel.RFIDProduto" Role="TB_RFID_PRODUTO" Multiplicity="0..1" />
+          <End Type="SmartMarketModel.ItemVenda" Role="TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_RFID_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+              <PropertyRef Name="RFIDSerial" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+              <PropertyRef Name="RFIDSerial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_SUPERMERC_PROD">
+          <End Type="SmartMarketModel.SupermercadoProduto" Role="TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Type="SmartMarketModel.ItemVenda" Role="TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITEM_VENDA_VENDA">
+          <End Type="SmartMarketModel.Venda" Role="TB_VENDA" Multiplicity="1" />
+          <End Type="SmartMarketModel.ItemVenda" Role="TB_ITEM_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_VENDA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_ITEM_VENDA">
+              <PropertyRef Name="IdVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUPERMERCADO_PRODUTO_PROD">
+          <End Type="SmartMarketModel.Produto" Role="TB_PRODUTO" Multiplicity="1" />
+          <End Type="SmartMarketModel.SupermercadoProduto" Role="TB_SUPERMERCADO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PRODUTO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RFID_PROD_SUPERMERC_PROD">
+          <End Type="SmartMarketModel.SupermercadoProduto" Role="TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Type="SmartMarketModel.RFIDProduto" Role="TB_RFID_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="TB_RFID_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_PROUTO_SECAO">
+          <End Type="SmartMarketModel.Secao" Role="TB_SECAO" Multiplicity="1" />
+          <End Type="SmartMarketModel.SecaoProduto" Role="TB_SECAO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SECAO">
+              <PropertyRef Name="Id" />
+              <PropertyRef Name="IdMercado" />
+            </Principal>
+            <Dependent Role="TB_SECAO_PRODUTO">
+              <PropertyRef Name="IdSecao" />
+              <PropertyRef Name="IdMercado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_SUPERMERCADO">
+          <End Type="SmartMarketModel.Supermercado" Role="TB_SUPERMERCADO" Multiplicity="1" />
+          <End Type="SmartMarketModel.Secao" Role="TB_SECAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_SECAO">
+              <PropertyRef Name="IdMercado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECAO_PROD_SUPERMERC_PROD">
+          <End Type="SmartMarketModel.SupermercadoProduto" Role="TB_SUPERMERCADO_PRODUTO" Multiplicity="1" />
+          <End Type="SmartMarketModel.SecaoProduto" Role="TB_SECAO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="TB_SECAO_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUPERMERC_PROD_SUPERMERC">
+          <End Type="SmartMarketModel.Supermercado" Role="TB_SUPERMERCADO" Multiplicity="1" />
+          <End Type="SmartMarketModel.SupermercadoProduto" Role="TB_SUPERMERCADO_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_SUPERMERCADO_PRODUTO">
+              <PropertyRef Name="IdMercado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDA_SUPERMERCADO">
+          <End Type="SmartMarketModel.Supermercado" Role="TB_SUPERMERCADO" Multiplicity="1" />
+          <End Type="SmartMarketModel.Venda" Role="TB_VENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_SUPERMERCADO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_VENDA">
+              <PropertyRef Name="IdMercado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Ativo" Type="Boolean" />
+          <Property Name="DataCadastro" Type="DateTime" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Precision="3" />
+          <Property Name="Deletado" Type="Boolean" />
+          <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoUsuario" Type="SmartMarketModel.CodigoTipoUsuario" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="SmartMarketModel.FK_USUARIO_CLIENTE" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="TipoUsuario" Relationship="SmartMarketModel.FK_TIPO_USUARIO" FromRole="Usuario" ToRole="TB_TIPO_USUARIO" />
+        </EntityType>
+        <EntityType Name="ConsultaListaCompra">
+          <Key>
+            <PropertyRef Name="IdListaCompra" />
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="DataCriacao" />
+          </Key>
+          <Property Name="IdListaCompra" Type="Int32" Nullable="false" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
+          <Property Name="QuantidadeDisponivel" Type="Int32" Nullable="false" />
+          <Property Name="ValorTotal" Type="Double" Nullable="false" />
+          <Property Name="DistanciaMaxima" Type="Int32" Nullable="false" />
+          <Property Name="SomenteDentroMunicipio" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ListaItem" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA" FromRole="TB_CONSULTA_LISTA_COMPRA" ToRole="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          <NavigationProperty Name="ListaCompra" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA" FromRole="TB_CONSULTA_LISTA_COMPRA" ToRole="TB_LISTA_COMPRA" />
+          <NavigationProperty Name="Supermercado" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO" FromRole="TB_CONSULTA_LISTA_COMPRA" ToRole="Supermercado" />
+          <Property Name="IdGeocode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ConsultaListaCompraItem">
+          <Key>
+            <PropertyRef Name="IdListaCompra" />
+            <PropertyRef Name="IdMercado" />
+            <PropertyRef Name="DataCriacao" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdListaCompra" Type="Int32" Nullable="false" />
+          <Property Name="IdMercado" Type="Int32" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="Disponivel" Type="Boolean" Nullable="false" />
+          <Property Name="Quantidade" Type="Double" />
+          <Property Name="ValorProduto" Type="Double" />
+          <NavigationProperty Name="ConsultaListaCompra" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA" FromRole="TB_CONSULTA_LISTA_COMPRA_ITEM" ToRole="TB_CONSULTA_LISTA_COMPRA" />
+          <NavigationProperty Name="ListaCompraItem" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM" FromRole="TB_CONSULTA_LISTA_COMPRA_ITEM" ToRole="TB_LISTA_COMPRA_ITEM" />
+        </EntityType>
+        <EntityType Name="ListaCompra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="QuantidadeItem" Type="Int32" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataUltimaConsulta" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="SmartMarketModel.FK_LISTA_COMPRA_CLIENTE" FromRole="TB_LISTA_COMPRA" ToRole="Cliente" />
+          <NavigationProperty Name="ListaConsulta" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA" FromRole="TB_LISTA_COMPRA" ToRole="TB_CONSULTA_LISTA_COMPRA" />
+          <NavigationProperty Name="ListaItem" Relationship="SmartMarketModel.FK_LISTA_COMPRA_ITEM_LISTA_COMPRA" FromRole="TB_LISTA_COMPRA" ToRole="TB_LISTA_COMPRA_ITEM" />
+          <Property Name="DataExclusao" Type="DateTime" Precision="3" />
+          <Property Name="Excluido" Type="Boolean" Nullable="false" />
+          <Property Name="IdGeocode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DistanciaMaxima" Type="Int32" Nullable="false" />
+          <Property Name="SomenteDentroMunicipio" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaCompraItem">
+          <Key>
+            <PropertyRef Name="IdListaCompra" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdListaCompra" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="Double" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDelecao" Type="DateTime" Precision="3" />
+          <Property Name="Deletado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ListaConsultaListaCompraItem" Relationship="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM" FromRole="TB_LISTA_COMPRA_ITEM" ToRole="TB_CONSULTA_LISTA_COMPRA_ITEM" />
+          <NavigationProperty Name="ListaCompra" Relationship="SmartMarketModel.FK_LISTA_COMPRA_ITEM_LISTA_COMPRA" FromRole="TB_LISTA_COMPRA_ITEM" ToRole="TB_LISTA_COMPRA" />
+          <NavigationProperty Name="Produto" Relationship="SmartMarketModel.FK_LISTA_COMPRA_ITEM_PRODUTO" FromRole="TB_LISTA_COMPRA_ITEM" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_LISTA_COMPRA_CLIENTE">
+          <End Type="SmartMarketModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="SmartMarketModel.ListaCompra" Role="TB_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA">
+          <End Type="SmartMarketModel.ConsultaListaCompra" Role="TB_CONSULTA_LISTA_COMPRA" Multiplicity="1" />
+          <End Type="SmartMarketModel.ConsultaListaCompraItem" Role="TB_CONSULTA_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="IdListaCompra" />
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="DataCriacao" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="IdListaCompra" />
+              <PropertyRef Name="IdMercado" />
+              <PropertyRef Name="DataCriacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA">
+          <End Type="SmartMarketModel.ListaCompra" Role="TB_LISTA_COMPRA" Multiplicity="1" />
+          <End Type="SmartMarketModel.ConsultaListaCompra" Role="TB_CONSULTA_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="IdListaCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO">
+          <End Type="SmartMarketModel.Supermercado" Role="Supermercado" Multiplicity="1" />
+          <End Type="SmartMarketModel.ConsultaListaCompra" Role="TB_CONSULTA_LISTA_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supermercado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA">
+              <PropertyRef Name="IdMercado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM">
+          <End Type="SmartMarketModel.ListaCompraItem" Role="TB_LISTA_COMPRA_ITEM" Multiplicity="1" />
+          <End Type="SmartMarketModel.ConsultaListaCompraItem" Role="TB_CONSULTA_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="IdListaCompra" />
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="TB_CONSULTA_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="IdListaCompra" />
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_COMPRA_ITEM_LISTA_COMPRA">
+          <End Type="SmartMarketModel.ListaCompra" Role="TB_LISTA_COMPRA" Multiplicity="1" />
+          <End Type="SmartMarketModel.ListaCompraItem" Role="TB_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA_COMPRA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="IdListaCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_COMPRA_ITEM_PRODUTO">
+          <End Type="SmartMarketModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="SmartMarketModel.ListaCompraItem" Role="TB_LISTA_COMPRA_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TB_LISTA_COMPRA_ITEM">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_CLIENTE">
+          <End Type="SmartMarketModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="SmartMarketModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="SmartMarketModel.CodigoTipoUsuario" Nullable="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_TIPO_USUARIO">
+          <End Type="SmartMarketModel.TipoUsuario" Role="TB_TIPO_USUARIO" Multiplicity="1" />
+          <End Type="SmartMarketModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TIPO_USUARIO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="CodigoTipoUsuario" >
+          <Member Name="UsuarioFinal" Value="1" />
+          <Member Name="AdministradorSupermercado" Value="2" />
+          <Member Name="AdminstradorSistema" Value="3" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="SmartMarketModel" />
+        <Alias Key="Target" Value="SmartMarketModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="SmartMarketModelContainer" StorageEntityContainer="SmartMarketModelStoreContainer">
+          <EntitySetMapping Name="ClienteSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Cliente">
+              <MappingFragment StoreEntitySet="TB_CLIENTE">
+                <ScalarProperty Name="Telefone" ColumnName="NR_TELEFONE" />
+                <ScalarProperty Name="Email" ColumnName="DS_EMAIL" />
+                <ScalarProperty Name="RG" ColumnName="NR_RG" />
+                <ScalarProperty Name="CPF" ColumnName="NR_CPF" />
+                <ScalarProperty Name="Nome" ColumnName="NM_CLIENTE" />
+                <ScalarProperty Name="Id" ColumnName="ID_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemVendaSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.ItemVenda">
+              <MappingFragment StoreEntitySet="TB_ITEM_VENDA">
+                <ScalarProperty Name="RFIDSerial" ColumnName="ID_SERIAL" />
+                <ScalarProperty Name="ValorProduto" ColumnName="VL_PRODUTO" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="NumeroItem" ColumnName="NR_ITEM" />
+                <ScalarProperty Name="IdVenda" ColumnName="ID_VENDA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProdutoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Produto">
+              <MappingFragment StoreEntitySet="TB_PRODUTO">
+                <ScalarProperty Name="PesoMinimo" ColumnName="VL_PESO_MIN" />
+                <ScalarProperty Name="PesoMaximo" ColumnName="VL_PESO_MAX" />
+                <ScalarProperty Name="PesoMedio" ColumnName="VL_PESO_MEDIO" />
+                <ScalarProperty Name="Nome" ColumnName="NM_PRODUTO" />
+                <ScalarProperty Name="Id" ColumnName="ID_PRODUTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RFIDProdutoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.RFIDProduto">
+              <MappingFragment StoreEntitySet="TB_RFID_PRODUTO">
+                <ScalarProperty Name="DataUltimaLeitura" ColumnName="DT_ULT_LEITURA" />
+                <ScalarProperty Name="DataConsumo" ColumnName="DT_CONSUMO" />
+                <ScalarProperty Name="DataEmisao" ColumnName="DT_EMISSAO" />
+                <ScalarProperty Name="RFIDSerial" ColumnName="ID_SERIAL" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecaoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Secao">
+              <MappingFragment StoreEntitySet="TB_SECAO">
+                <ScalarProperty Name="Nome" ColumnName="NM_SECAO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="Id" ColumnName="ID_SECAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecaoProdutoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.SecaoProduto">
+              <MappingFragment StoreEntitySet="TB_SECAO_PRODUTO">
+                <ScalarProperty Name="Ativo" ColumnName="IN_ATIVO" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="IdSecao" ColumnName="ID_SECAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupermercadoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Supermercado">
+              <MappingFragment StoreEntitySet="TB_SUPERMERCADO">
+                <ScalarProperty Name="IdGeocode" ColumnName="ID_GEOCODE" />
+                <ScalarProperty Name="Nome" ColumnName="NM_MERCADO" />
+                <ScalarProperty Name="Id" ColumnName="ID_MERCADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupermercadoProdutoSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.SupermercadoProduto">
+              <MappingFragment StoreEntitySet="TB_SUPERMERCADO_PRODUTO">
+                <ScalarProperty Name="QuantidadeEstoque" ColumnName="QT_ESTOQUE" />
+                <ScalarProperty Name="ValorProduto" ColumnName="VL_PRODUTO" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendaSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Venda">
+              <MappingFragment StoreEntitySet="TB_VENDA">
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="DataVenda" ColumnName="DT_VENDA" />
+                <ScalarProperty Name="IdCliente" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="Id" ColumnName="ID_VENDA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioSet">
+            <EntityTypeMapping TypeName="SmartMarketModel.Usuario">
+              <MappingFragment StoreEntitySet="TB_USUARIO">
+                <ScalarProperty Name="IdCliente" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="ID_TIPO_USUARIO" />
+                <ScalarProperty Name="Senha" ColumnName="DS_SENHA" />
+                <ScalarProperty Name="Deletado" ColumnName="IN_DELETADO" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DT_ALTERACAO" />
+                <ScalarProperty Name="DataCadastro" ColumnName="DT_CADASTRO" />
+                <ScalarProperty Name="Ativo" ColumnName="IN_ATIVO" />
+                <ScalarProperty Name="Email" ColumnName="DS_EMAIL" />
+                <ScalarProperty Name="Nome" ColumnName="NM_USUARIO" />
+                <ScalarProperty Name="Id" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CONSULTA_LISTA_COMPRA">
+            <EntityTypeMapping TypeName="SmartMarketModel.ConsultaListaCompra">
+              <MappingFragment StoreEntitySet="TB_CONSULTA_LISTA_COMPRA">
+                <ScalarProperty Name="IdGeocode" ColumnName="ID_GEOCODE_CONSULTA" />
+                <ScalarProperty Name="SomenteDentroMunicipio" ColumnName="IN_DENTRO_MUNICIPIO" />
+                <ScalarProperty Name="DistanciaMaxima" ColumnName="VL_DISTANCIA_MAXIMA" />
+                <ScalarProperty Name="ValorTotal" ColumnName="VL_TOTAL" />
+                <ScalarProperty Name="QuantidadeDisponivel" ColumnName="QT_ITEM_DISPONIVEL" />
+                <ScalarProperty Name="Quantidade" ColumnName="QT_ITEM" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="IdListaCompra" ColumnName="ID_LISTA_COMPRA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CONSULTA_LISTA_COMPRA_ITEM">
+            <EntityTypeMapping TypeName="SmartMarketModel.ConsultaListaCompraItem">
+              <MappingFragment StoreEntitySet="TB_CONSULTA_LISTA_COMPRA_ITEM">
+                <ScalarProperty Name="ValorProduto" ColumnName="VL_PRODUTO" />
+                <ScalarProperty Name="Quantidade" ColumnName="QT_ITEM" />
+                <ScalarProperty Name="Disponivel" ColumnName="IN_DISPONIVEL" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="IdMercado" ColumnName="ID_MERCADO" />
+                <ScalarProperty Name="IdListaCompra" ColumnName="ID_LISTA_COMPRA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LISTA_COMPRA">
+            <EntityTypeMapping TypeName="SmartMarketModel.ListaCompra">
+              <MappingFragment StoreEntitySet="TB_LISTA_COMPRA">
+                <ScalarProperty Name="SomenteDentroMunicipio" ColumnName="IN_DENTRO_MUNICIPIO" />
+                <ScalarProperty Name="DistanciaMaxima" ColumnName="VL_DISTANCIA_MAXIMA" />
+                <ScalarProperty Name="IdGeocode" ColumnName="ID_GEOCODE_CONSULTA" />
+                <ScalarProperty Name="Excluido" ColumnName="IN_EXCLUIDO" />
+                <ScalarProperty Name="DataExclusao" ColumnName="DT_EXCLUSAO" />
+                <ScalarProperty Name="DataUltimaConsulta" ColumnName="DT_ULT_CONSULTA" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DT_ALTERACAO" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="QuantidadeItem" ColumnName="QT_ITEM" />
+                <ScalarProperty Name="IdCliente" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="Descricao" ColumnName="DS_LISTA_COMPRA" />
+                <ScalarProperty Name="Id" ColumnName="ID_LISTA_COMPRA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LISTA_COMPRA_ITEM">
+            <EntityTypeMapping TypeName="SmartMarketModel.ListaCompraItem">
+              <MappingFragment StoreEntitySet="TB_LISTA_COMPRA_ITEM">
+                <ScalarProperty Name="Deletado" ColumnName="IN_DELETADO" />
+                <ScalarProperty Name="DataDelecao" ColumnName="DT_DELECAO" />
+                <ScalarProperty Name="DataAlteracao" ColumnName="DT_ALTERACAO" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="Quantidade" ColumnName="QT_ITEM" />
+                <ScalarProperty Name="IdProduto" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="IdListaCompra" ColumnName="ID_LISTA_COMPRA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_TIPO_USUARIO">
+            <EntityTypeMapping TypeName="SmartMarketModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TB_TIPO_USUARIO">
+                <ScalarProperty Name="Descricao" ColumnName="DS_TIPO_USUARIO" />
+                <ScalarProperty Name="Id" ColumnName="ID_TIPO_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

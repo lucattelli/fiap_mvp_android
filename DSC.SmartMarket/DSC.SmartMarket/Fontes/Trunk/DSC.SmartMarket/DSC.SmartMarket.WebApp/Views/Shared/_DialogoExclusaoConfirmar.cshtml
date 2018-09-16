@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+<div id="dialog-confirm" style="display: none;" title="Excluir">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Confirma a exclusão do registro?</p>
+</div>
+<script>
+	$(document).ready($("#dialog-confirm").hide());
+	function confirmarExclusao(url, mensagem) {
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+				"Sim": function() {
+					window.location = url;
+				},
+				"Não": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	};
+</script>

@@ -1,0 +1,150 @@
+﻿@model DSC.SmartMarket.WebApp.Models.IndexProdutoViewModel
+@using System.Linq;
+@using DSC.SmartMarket.WebApp.Models;
+@{
+
+    ViewBag.Title = "Listagem de Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var x = Model;
+
+}
+<section class="row borderbox">
+    <h2>Listagem de Produtos</h2>
+    <form class="form-horizontal">
+        <div class="form-group" />
+        @if ((Model.ListaProduto != null) && Model.ListaProduto.Any())
+        {
+            <table class="listagem col-sm-12">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Peso Médio</th>
+                        <th>Peso Mínimo</th>
+                        <th>Peso Máximo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var produto in Model.ListaProduto)
+                    {
+                        <tr @Html.Raw(Model.ProdutoEditar.Id == produto.Id ? "class='selected'" : "")>
+                            <td>@produto.Id</td>
+                            <td>@produto.Nome</td>
+                            <td>@produto.PesoMedio</td>
+                            <td>@produto.PesoMinimo</td>
+                            <td>@produto.PesoMaximo</td>
+                            <td><button type="button" class="btn" onclick="javascript: window.document.location='@Url.Action("Editar", new { id = produto.Id, Pagina = Model.Pagina })'" @(Model.Operacao == IndexProdutoViewModel.TipoOperacao.Listar ? "" : "disabled")>Editar</button><button type="button" class="btn" onclick="javascript: confirmarExclusao('@Url.Action("Remover", new { id = produto.Id, Pagina = Model.Pagina })');" @(Model.Operacao == IndexProdutoViewModel.TipoOperacao.Listar ? "" : "disabled")>Apagar</button></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            Página(s):&nbsp;&nbsp;&nbsp;
+                            @if (Model.Pagina > 1)
+                            {
+                                @Html.ActionLink("Anterior", "Index", "Produto", new { Pagina = Model.Pagina - 1 }, new { onclick = Model.Operacao != IndexProdutoViewModel.TipoOperacao.Listar ? "javascript: return false" : "" })
+                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                            }
+                            @for (int i = 1; i <= Model.TotalPagina; i++)
+                            {
+                                if (i == Model.Pagina)
+                                {
+                                    @Html.Raw(i.ToString());
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(i.ToString(), "Index", "Produto", new { Pagina = i }, new { onclick = Model.Operacao != IndexProdutoViewModel.TipoOperacao.Listar ? "javascript: return false" : "" });
+                                }
+                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                            }
+                            @if (Model.Pagina < Model.TotalPagina)
+                            {
+                                @Html.ActionLink("Mais", "Index", "Produto", new { Pagina = Model.Pagina + 1 }, new { onclick = Model.Operacao != IndexProdutoViewModel.TipoOperacao.Listar ? "javascript: return false" : "" })
+                            }
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            @RenderPage("~/Views/Shared/_DialogoExclusaoConfirmar.cshtml")
+        }
+        else
+        {
+            <div>Não existem registros de produtos a serem apresentados.</div>
+        }
+        </div>
+    </form>
+</section>
+@if (Model.Operacao == IndexProdutoViewModel.TipoOperacao.Listar)
+{
+    <section class="row">
+        <button type="button" class="btn btn-default btn-primary" onclick="javascript: window.document.location='@Url.Action("Inserir", "Produto", new { Pagina = Model.Pagina })'">Adicionar Produto</button>
+        <button type="button" class="btn" onclick="javascript: window.document.location = '@Url.Action("Index","Dashboard")'">Voltar</button>
+    </section>
+}
+@if (Model.Operacao == IndexProdutoViewModel.TipoOperacao.Inserir || Model.Operacao == IndexProdutoViewModel.TipoOperacao.Editar)
+{
+    <section class="row borderbox">
+        @if (Model.Operacao == IndexProdutoViewModel.TipoOperacao.Inserir)
+        {
+            <h2>Inserir Novo Produto</h2>
+        }
+        else
+        {
+            <h2>Alterar Produto</h2>
+        }
+        @using (Html.BeginForm("Salvar", "Produto", new { pagina = Model.Pagina }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(model => model.ProdutoEditar.Id)
+            @Html.HiddenFor(model => model.Operacao)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProdutoEditar.Nome, "Nome*:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(model => model.ProdutoEditar.Nome, new { @class = "form-control", placeholder = "Digite o Nome", required = "required" })
+                    @Html.ValidationMessageFor(model => model.ProdutoEditar.Nome)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProdutoEditar.PesoMinimo, "Peso Mínimo:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ProdutoEditar.PesoMinimo, new { @class = "form-control", placeholder = "Digite o Peso Mínimo", required = "required", min = "0", step = "1", type = "number" })
+                    @Html.ValidationMessageFor(model => model.ProdutoEditar.PesoMinimo)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProdutoEditar.PesoMedio, "Peso Médio:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ProdutoEditar.PesoMedio, new { @class = "form-control", placeholder = "Digite o Peso Médio", required = "required", min = "0", step = "1", type = "number" })
+                    @Html.ValidationMessageFor(model => model.ProdutoEditar.PesoMedio)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProdutoEditar.PesoMaximo, "Peso Máximo:", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(model => model.ProdutoEditar.PesoMaximo, new { @class = "form-control", placeholder = "Digite o Peso Máximo", required = "required", min = "0", step = "1", type = "number" })
+                    @Html.ValidationMessageFor(model => model.ProdutoEditar.PesoMaximo)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <span style="font-size: smaller;">* Campos de preenchimento obrigatório.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <button type="submit" class="btn btn-default btn-primary" id="btnenviar">Confirmar</button>
+                    <button type="button" class="btn" id="btncancelar" onclick="javascript: window.document.location='@Url.Action("Index", "Produto", new { Pagina = Model.Pagina })'">Cancelar</button>
+                </div>
+            </div>
+        }
+    </section>
+    if (!Model.IsValid)
+    {
+    <section class="row errorbox">
+        @Html.ValidationSummary("Por favor verifique os seguinte(s) erro(s) abaixo:")
+    </section>
+    }
+}
+@*@RenderPage("~/Views/Shared/_ErrorBox.cshtml")
+    @RenderPage("~/Views/Shared/_ModalBox.cshtml")*@

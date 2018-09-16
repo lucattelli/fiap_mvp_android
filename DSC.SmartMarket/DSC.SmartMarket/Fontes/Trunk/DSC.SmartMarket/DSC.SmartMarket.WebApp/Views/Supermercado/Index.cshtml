@@ -1,0 +1,139 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Listagem de Supermercados";
+}
+@*<section class="row borderbox">
+    <h2>Listagem de Supermercados</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <c:if test="${not empty listaSupermercado and tamLista gt 0}">
+                <c:set var="tamPagina" value="5" />
+                <c:set var="qtdPagina" value="${ tamLista / tamPagina + ((tamLista mod tamPagina > 0) ? 1 : 0) }" />
+                <c:if test="${ empty paginaAtual }">
+                    <c:set var="paginaAtual" value="1"></c:set>
+                </c:if>
+                <c:set var="regInicial" value="${ (paginaAtual - 1) * tamPagina }" />
+                <c:set var="regFinal" value="${ paginaAtual * tamPagina }" />
+                <table class="listagem col-sm-12">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th style="width: 18em"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="supermercado" items="${listaSupermercado}" varStatus="status">
+                            <c:if test="${status.index ge regInicial and status.index lt regFinal}">
+                                <c:url var="urlAlterar" value="${controllerName}">
+                                    <c:param name="action" value="editar" />
+                                    <c:param name="pagina" value="${paginaAtual}" />
+                                    <c:param name="id" value="${supermercado.id}" />
+                                </c:url>
+                                <c:url var="urlExcluir" value="${controllerName}">
+                                    <c:param name="action" value="excluir" />
+                                    <c:param name="pagina" value="${paginaAtual}" />
+                                    <c:param name="id" value="${supermercado.id}" />
+                                </c:url>
+                                <c:url var="urlSecao" value="${secaoControllerName}">
+                                    <c:param name="action" value="listar" />
+                                    <c:param name="idSupermercado" value="${supermercado.id}" />
+                                </c:url>
+                                <tr ${ supermercadoEditar.id= =supermercado.id ? "class='selected'" : "" }>
+                                    <td>${supermercado.id}</td>
+                                    <td>${supermercado.nome}</td>
+                                    <td style="width: 18em"><button type="button" class="btn" onclick="javascript: window.document.location='${urlAlterar}'" ${ pageAction= ="listar" ? "" : "disabled" }>Editar</button><button type="button" class="btn" onclick="javascript: confirmarExclusao('${urlExcluir}');" ${ pageAction= ="listar" ? "" : "disabled" }>Apagar</button><button type="button" class="btn" onclick="javascript: window.document.location='${urlSecao}'" ${ pageAction= ="listar" ? "" : "disabled" }>Se��es</button></td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                P�gina(s):&nbsp;&nbsp;&nbsp;
+                                <c:if test="${ paginaAtual gt 1 }">
+                                    <c:url var="urlPaginaAnterior" value="${controllerName}">
+                                        <c:param name="action" value="listar" />
+                                        <c:param name="pagina" value="${ paginaAtual - 1 }" />
+                                    </c:url>
+                                    <a href="${ urlPaginaAnterior }" ${ pageAction= ="listar" ? "" : "onclick='javascript: return false'" }>Anterior</a>&nbsp;&nbsp;&nbsp;
+                                </c:if>
+                                <c:forEach var="page" begin="1" end="${ qtdPagina }">
+                                    <c:url var="urlPagina" value="${controllerName}">
+                                        <c:param name="action" value="listar" />
+                                        <c:param name="pagina" value="${ page }" />
+                                    </c:url>
+                                    <c:if test="${ page eq paginaAtual }">
+                                        <c:out value="${ page }" />
+                                    </c:if>
+                                    <c:if test="${ page ne paginaAtual }">
+                                        <a href="${ urlPagina }" ${ pageAction= ="listar" ? "" : "onclick='javascript: return false'" }>${ page }</a>
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${paginaAtual + ((tamLista mod tamPagina > 0) ? 1 : 0) lt qtdPagina}">
+                                    <c:url var="urlPaginaProxima" value="${controllerName}">
+                                        <c:param name="action" value="listar" />
+                                        <c:param name="pagina" value="${ paginaAtual + 1 }" />
+                                    </c:url>
+                                    &nbsp;&nbsp;&nbsp;<a href="${urlPaginaProxima }" ${ pageAction= ="listar" ? "" : "onclick='javascript: return false'" }>Mais</a>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <jsp:include page="dialogexclusaoconfirmar.jsp" />
+            </c:if>
+            <c:if test="${empty listaSupermercado}">
+                <div>N�o existem registros de Supermercados a serem apresentados.</div>
+            </c:if>
+        </div>
+    </form>
+</section>
+<c:if test="${pageAction eq \" listar\" }">
+    <section class="row">
+        <c:url var="urlInserir" value="${controllerName}">
+            <c:param name="action" value="inserir" />
+            <c:param name="pagina" value="${paginaAtual}" />
+        </c:url>
+        <button type="button" class="btn btn-default btn-primary" onclick="javascript: window.document.location='${urlInserir}'">Adicionar Supermercado</button>
+        <button type="button" class="btn" onclick="javascript: window.document.location = 'dashboard.jsp'">Voltar</button>
+    </section>
+</c:if>
+<c:if test="${pageAction eq \" inserir\" or pageAction eq \"editar\" }">
+    <section class="row borderbox">
+        <c:if test="${pageAction eq \" inserir\" }">
+            <h2>Inserir Novo Supermercado</h2>
+        </c:if>
+        <c:if test="${pageAction eq \" editar\" }">
+            <h2>Alterar Supermercado</h2>
+        </c:if>
+        <form id="clienteform" class="form-horizontal" method="post">
+            <input type="hidden" name="idCliente" value="${supermercadoEditar.id}" />
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nome">Nome*:</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Nome" required="required" value="${supermercadoEditar.nome}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <span style="font-size: smaller;">* Campos de preenchimento obrigat�rio.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <c:url var="urlCancelar" value="${controllerName}">
+                        <c:param name="action" value="listar" />
+                        <c:param name="pagina" value="${paginaAtual}" />
+                    </c:url>
+                    <button type="submit" class="btn btn-default btn-primary" id="btnenviar">Confirmar</button>
+                    <button type="button" class="btn" id="btncancelar" onclick="javascript: window.document.location='${urlCancelar}'">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </section>
+</c:if>
+<jsp:include page="errorbox.jsp" />
+<jsp:include page="modalbox.jsp" />*@

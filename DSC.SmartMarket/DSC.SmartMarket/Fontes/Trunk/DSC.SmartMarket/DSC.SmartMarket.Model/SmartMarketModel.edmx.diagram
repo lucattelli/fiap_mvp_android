@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d832ffb6fea4431183c238d1e1649013" Name="Principal" >
+        <EntityTypeShape EntityType="SmartMarketModel.Cliente" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="SmartMarketModel.ItemVenda" Width="1.875" PointX="12.25" PointY="6.375" />
+        <EntityTypeShape EntityType="SmartMarketModel.Produto" Width="2.375" PointX="2.875" PointY="2.375" />
+        <EntityTypeShape EntityType="SmartMarketModel.RFIDProduto" Width="1.875" PointX="9.375" PointY="3.125" />
+        <EntityTypeShape EntityType="SmartMarketModel.Secao" Width="2.625" PointX="1.875" PointY="9.625" />
+        <EntityTypeShape EntityType="SmartMarketModel.SecaoProduto" Width="3.25" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="SmartMarketModel.Supermercado" Width="2" PointX="0.5" PointY="6.5" />
+        <EntityTypeShape EntityType="SmartMarketModel.SupermercadoProduto" Width="2.25" PointX="5.375" PointY="5.125" />
+        <EntityTypeShape EntityType="SmartMarketModel.Venda" Width="1.5" PointX="3" PointY="6.25" />
+        <AssociationConnector Association="SmartMarketModel.FK_VENDA_CLIENTE" />
+        <AssociationConnector Association="SmartMarketModel.FK_ITEM_VENDA_RFID_PRODUTO" />
+        <AssociationConnector Association="SmartMarketModel.FK_ITEM_VENDA_SUPERMERC_PROD" />
+        <AssociationConnector Association="SmartMarketModel.FK_ITEM_VENDA_VENDA" />
+        <AssociationConnector Association="SmartMarketModel.FK_SUPERMERCADO_PRODUTO_PROD" />
+        <AssociationConnector Association="SmartMarketModel.FK_RFID_PROD_SUPERMERC_PROD" />
+        <AssociationConnector Association="SmartMarketModel.FK_SECAO_PROUTO_SECAO" />
+        <AssociationConnector Association="SmartMarketModel.FK_SECAO_SUPERMERCADO" />
+        <AssociationConnector Association="SmartMarketModel.FK_SECAO_PROD_SUPERMERC_PROD" />
+        <AssociationConnector Association="SmartMarketModel.FK_SUPERMERC_PROD_SUPERMERC" />
+        <AssociationConnector Association="SmartMarketModel.FK_VENDA_SUPERMERCADO" />
+        <EntityTypeShape EntityType="SmartMarketModel.Usuario" Width="2.25" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SmartMarketModel.ConsultaListaCompra" Width="2.625" PointX="5.25" PointY="13.875" />
+        <EntityTypeShape EntityType="SmartMarketModel.ConsultaListaCompraItem" Width="2.75" PointX="12.25" PointY="11.75" />
+        <EntityTypeShape EntityType="SmartMarketModel.ListaCompra" Width="2.25" PointX="0.5" PointY="14.5" />
+        <EntityTypeShape EntityType="SmartMarketModel.ListaCompraItem" Width="2.875" PointX="9" PointY="9" />
+        <AssociationConnector Association="SmartMarketModel.FK_LISTA_COMPRA_CLIENTE" />
+        <AssociationConnector Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_CONSULTA_LISTA_COMPRA" />
+        <AssociationConnector Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_LISTA_COMPRA" />
+        <AssociationConnector Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_SUPERMERCADO" />
+        <AssociationConnector Association="SmartMarketModel.FK_CONSULTA_LISTA_COMPRA_ITEM_LISTA_COMPRA_ITEM" />
+        <AssociationConnector Association="SmartMarketModel.FK_LISTA_COMPRA_ITEM_LISTA_COMPRA" />
+        <AssociationConnector Association="SmartMarketModel.FK_LISTA_COMPRA_ITEM_PRODUTO" />
+        <AssociationConnector Association="SmartMarketModel.FK_USUARIO_CLIENTE" />
+        <EntityTypeShape EntityType="SmartMarketModel.TipoUsuario" Width="1.5" PointX="10" PointY="0.875" />
+        <AssociationConnector Association="SmartMarketModel.FK_TIPO_USUARIO" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
